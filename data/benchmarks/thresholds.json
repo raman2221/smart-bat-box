@@ -1,0 +1,77 @@
+{
+  "version": 2,
+  "baseline_model": "finetuned_detector_blend70.pt (70% v4 + 30% v3 weight blend, made by training/combine_models.py)",
+  "baseline_sha256": "d5f1f53606e5c104b47b7c8f247d32402f22684e3e5f4724f06c473d97ca64c4",
+  "baseline_confidence": 0.8,
+  "min_iou": 0.3,
+  "minimum": {
+    "bat_recall": 0.696969696969697,
+    "inaturalist_recall": 0.6533333333333333
+  },
+  "maximum": {
+    "false_alarm_rate": 0.10333333333333333,
+    "people_false_alarm_rate": 0.08333333333333333
+  },
+  "baseline": {
+    "bat_recall": {
+      "hits": 24,
+      "total": 33,
+      "rate": 0.7272727272727273
+    },
+    "inaturalist_recall": {
+      "hits": 101,
+      "total": 150,
+      "rate": 0.6733333333333333
+    },
+    "false_alarm_rate": {
+      "hits": 28,
+      "total": 300,
+      "rate": 0.09333333333333334
+    },
+    "people_false_alarm_rate": {
+      "hits": 4,
+      "total": 60,
+      "rate": 0.06666666666666667
+    }
+  },
+  "notes": "Re-baselined on purpose when the production model changed from v3 (confidence 0.7) to the 70% v4 / 30% v3 blend (confidence 0.8). The blend trades a little hand-labelled close-up recall (24/33 vs 27/33 on this benchmark) for far fewer false alarms (28/300 vs 50/300) and fewer people false alarms (4/60 vs 6/60). Same tolerance rule as version 1: limits allow one more missed hand label, three more missed iNaturalist photos, three more false-alarm photos and one more people false-alarm photo than the baseline; larger regressions fail. Same fixed benchmark photos.",
+  "history": [
+    {
+      "version": 1,
+      "baseline_model": "finetuned_detector_v3.pt",
+      "baseline_sha256": "4877318b9347e41ee21632ac2a55de84af685523a63d3fcb297aaad11f083e0f",
+      "baseline_confidence": 0.7,
+      "minimum": {
+        "bat_recall": 0.7878787878787878,
+        "inaturalist_recall": 0.6666666666666666
+      },
+      "maximum": {
+        "false_alarm_rate": 0.17666666666666667,
+        "people_false_alarm_rate": 0.11666666666666667
+      },
+      "baseline": {
+        "bat_recall": {
+          "hits": 27,
+          "total": 33,
+          "rate": 0.8181818181818182
+        },
+        "inaturalist_recall": {
+          "hits": 103,
+          "total": 150,
+          "rate": 0.6866666666666666
+        },
+        "false_alarm_rate": {
+          "hits": 50,
+          "total": 300,
+          "rate": 0.16666666666666666
+        },
+        "people_false_alarm_rate": {
+          "hits": 6,
+          "total": 60,
+          "rate": 0.1
+        }
+      },
+      "notes": "Fixed subset selected by SHA256(sbb-accuracy-v1: + relative path) before scoring: 32 Open Images val hand-labelled photos (33 boxes), 150 supplied held-out iNaturalist test photos, and 60 val negatives in each of people/birds/lights/animals/other. Exclusive group precedence: people, birds, lights, animals, other. iNaturalist is held-out test, not Open Images val. Limits allow exactly one additional missed hand label, three additional missed iNaturalist photos, three additional overall false-alarm photos, and one additional people false-alarm photo relative to byte-identical v3 production at confidence 0.7. Larger regressions fail. These are regression tolerances, not confidence bounds or deployment safety requirements. Hand recall uses one-to-one IoU >= 0.3; iNaturalist uses any detection; alarms count photos. Default config confidence is the baseline; confidence overrides are scored as configured against the same fixed limits. Run slow GPU gate explicitly; set SBB_SKIP_ACCURACY=1 for fast suite."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+# Python environment and caches (rebuilt with: pip install -r requirements.txt)
+.venv/
+__pycache__/
+*.pyc
+
+# Model files: too big for GitHub (over 100 MB) and BatNet is CC BY-NC-SA.
+# Base model: python vision/download_model.py
+models/
+*.pt
+*.pt.zip
+
+# Training photos, caches and reports: several GB, and most photos are
+# CC BY-NC licensed. Only the small fixed accuracy benchmark is kept.
+data/*
+!data/benchmarks/
+
+# Someone else's repository (https://github.com/GabiK-bat/BatNet)
+BatNet_repo/
+
+# Half-finished downloads
+*.part
+
+# Local working notes (not for the public repo)
+COORDINATION.md
+tests/review-results.txt
