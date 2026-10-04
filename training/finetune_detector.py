@@ -33,7 +33,7 @@ Checked on photos it never trains on:
 
 By default it continues from the last fine-tuned model (faster). Use
 --from-scratch to start again from BatNet's original detector. The best
-epoch is saved to models/detection/finetuned_detector.pt only if it beats
+epoch is saved to models/detection/finetuned_detector.pth only if it beats
 the starting model (use --save-to or --no-save for test runs).
 
 Run from the project folder (with the .venv active):
@@ -580,7 +580,7 @@ def parse_args(argv=None):
                              f"before training and at the end; default: {INAT_EVERY})")
     parser.add_argument("--save-to", type=Path, default=config.FINETUNED_DETECTOR_FILE,
                         help="where to save the best epoch (default: the model the app uses, "
-                             "models/detection/finetuned_detector.pt)")
+                             "models/detection/finetuned_detector.pth)")
     parser.add_argument("--no-save", action="store_true",
                         help="don't save any weights (for timing or test runs)")
     parser.add_argument("--benchmark", type=int, metavar="N",

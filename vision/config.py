@@ -133,4 +133,4 @@ QC_EXCLUDE_FILE = PROJECT_ROOT / "data" / "qc_exclude.txt"
 ROOM_NEGATIVES_DIR = PROJECT_ROOT / "data" / "room_negatives"
 
 # Fine-tuned detector weights, created by training/finetune_detector.py.
-FINETUNED_DETECTOR_FILE = WEIGHTS_DIR / "finetuned_detector.pt"
+FINETUNED_DETECTOR_FILE = WEIGHTS_DIR / "finetuned_detector.pth"

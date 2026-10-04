@@ -76,7 +76,7 @@ The downloader places BatNet's base package at
 `models/detection/basemodel.pt.zip` and skips downloading if it already exists.
 Keep this package even when using fine-tuned weights: it provides the model code
 and species classifier. The detector automatically loads
-`models/detection/finetuned_detector.pt` when present; otherwise it uses the base
+`models/detection/finetuned_detector.pth` when present; otherwise it uses the base
 detector. The current fine-tuned model is v3, with backups named
 `finetuned_detector_v1.pt`, `finetuned_detector_v2.pt`, and
 `finetuned_detector_v3.pt` in the same folder.
@@ -132,7 +132,7 @@ Example order:
 | 5. `synthesize_data.py` | Paste training bat crops onto non-bat backgrounds and save boxes and a preview. | `python training/synthesize_data.py --count 2000` |
 | 6. `quality_check.py` | Check images, boxes, duplicates, and split leakage; write training exclusions. | `python training/quality_check.py --write-exclude` |
 | 7. `finetune_detector.py` | Train the detector using Open Images, automatic labels, synthetic images, and room negatives. | `python training/finetune_detector.py` |
-| 8. `evaluate.py` | Compare saved detectors on check photos, false alarms, and inference speed. | `python training/evaluate.py models/detection/finetuned_detector_v2.pt models/detection/finetuned_detector.pt` |
+| 8. `evaluate.py` | Compare saved detectors on check photos, false alarms, and inference speed. | `python training/evaluate.py models/detection/finetuned_detector_v2.pt models/detection/finetuned_detector.pth` |
 | 9. `find_hard_negatives.py` | Rank non-bat photos and Open Images classes that fool the detector; use them in the next data round. | `python training/find_hard_negatives.py` |
 
 Inspect the audit sheets in `data/audit/` and the synthetic preview at

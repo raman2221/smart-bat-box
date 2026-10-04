@@ -7,6 +7,7 @@ __pycache__/
 # Base model: python vision/download_model.py
 models/
 *.pt
+*.pth
 *.pt.zip
 
 # Training photos, caches and reports: several GB, and most photos are
