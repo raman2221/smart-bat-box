@@ -58,6 +58,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from training import cache_images  # noqa: E402
+from training.export_model import half_precision  # noqa: E402
 from vision import config  # noqa: E402
 
 IMAGE_SIZE = cache_images.DEFAULT_SIZE   # BatNet's detector works on 320x320 images
@@ -711,7 +712,9 @@ def main():
                 print("  best so far (not saved: --no-save)")
             else:
                 args.save_to.parent.mkdir(parents=True, exist_ok=True)
-                torch.save(detector.state_dict(), args.save_to)
+                # Saved as 16-bit numbers (~84 MB instead of ~168 MB) so the
+                # .pth fits on GitHub; it loads back as normal 32-bit weights.
+                torch.save(half_precision(detector.state_dict()), args.save_to)
                 print(f"  saved -> {args.save_to}")
 
     if best_epoch is None:
