@@ -1,5 +1,18 @@
 # Smart Bat Box
 
+> **Built at MHacks 2026.** My part was the machine learning: I fine-tuned
+> [BatNet](https://github.com/GabiK-bat/BatNet)'s Faster R-CNN bat detector in
+> PyTorch on 10,000+ images, then trained a tiny FOMO model in Edge Impulse to run
+> on an Arduino UNO Q. My teammates built the bat box, the temperature, humidity,
+> light and sound sensors, and the live dashboard.
+
+| Result (held-out photos) | Before | After |
+| --- | --- | --- |
+| Hand-labelled bats found | 3% (1 of 33) | 70% (23 of 33) |
+| People correctly ignored | 49% (first fine-tune) | 96% (of 398) |
+| Non-bat photos called a bat | 42% (first fine-tune) | 13% (of 1,136) |
+| Speed | ~2 frames/s on CPU | 25 ms/frame (RTX 4070), ~10 ms/frame on the UNO Q (FOMO) |
+
 A hackathon prototype that watches a bat box entrance with a webcam. The live
 view says **BAT DETECTED** or **NOT A BAT**. Behind the scenes, it follows each
 bat, decides whether its completed path means **IN** or **OUT**, and saves a
